@@ -16,7 +16,7 @@ Web UI casestudy - shopping website
 | User  | **user@demo.com**  | **User@123**  |  
  
 #### Project done by
-* 
+* [Siyanda(https://github.com/Siyanda16-gif)]
 
 ```diff
 - In some cases the first run shows an error similar to
