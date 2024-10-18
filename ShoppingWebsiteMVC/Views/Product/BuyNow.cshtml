@@ -1,0 +1,38 @@
+﻿@model ShoppingWebsiteMVC.Models.User
+
+@{
+    ViewBag.Title = "BuyNow";
+}
+<style>
+    .LL{
+        color:black;
+    }
+</style>
+<h2  class="LL">Pay Your Order</h2>
+
+<div>
+    <h4  class="LL">Confirm Payment</h4>
+    <hr />
+
+    <div class="LL">Thankyou </div>
+    <div class="LL"> @Html.DisplayFor(model => model.Firstname) @Html.DisplayFor(model => model.Lastname), for shopping with us</div>
+    <p class="LL">Your order will be delivered to: </p>
+    <blockquote>
+        <div class="LL">@Html.DisplayFor(model => model.Address)</div> 
+        <br />
+        <div class="LL">@Html.DisplayFor(model => model.City)</div> 
+        <br />
+        <div  class="LL"> @Html.DisplayFor(model => model.Country)</div> 
+    </blockquote>
+    <div class="alert-info"class="LL">Complete your payment by clicking paynow</div>
+    @*<div>
+        @Html.ActionLink("Pay Now", "ConfirmOrder", new { UserId = ViewBag.UserId, ProductId = ViewBag.ProductId }, new { @class = "mt-2 col-4 btn btn-success" })
+    </div>*@
+<div>
+    @Html.ActionLink("Pay Now", "Create", "Pay", null, new { @class = "btn btn-success col-4" })
+
+</div>
+</div>
+<p class="mt-2">
+     @Html.ActionLink("Back to Cart", "Cart","User",null, new { @class = "btn btn-info btn-sm" })
+</p>

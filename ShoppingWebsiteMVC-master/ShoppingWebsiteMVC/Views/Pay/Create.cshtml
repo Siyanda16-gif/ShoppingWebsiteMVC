@@ -1,0 +1,259 @@
+﻿@model ShoppingWebsiteMVC.Models.Payments
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@*<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Payments</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Card_Number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Card_Number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Card_Number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Espiry_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Espiry_Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Espiry_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VCC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VCC, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VCC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+    @Html.ActionLink("Pay Now", "ConfirmAllOrder", "Product", null, new { @class = "btn btn-success col-4" })
+
+}*@
+<style>
+    .payment-container {
+        width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-types {
+        margin-bottom: 20px;
+    }
+
+    .payment-type {
+        margin-bottom: 10px;
+    }
+
+   /* .payment-form {
+        display: none;
+    }
+
+    .card-payment-form, .eft-payment-form {
+        display: none;
+    }*/
+
+    .payment-form label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .payment-form input[type="text"] {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    .pay-button {
+        text-align: center;
+    }
+
+    .btn {
+        width: 100px;
+        height: 40px;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .btn:hover {
+            background-color: #3e8e41;
+        }
+    .pay-button:hover{
+        cursor:pointer;
+    }
+    /*.jj{
+        width:25px;
+    }*/
+</style >
+
+
+<div class="payment-container">
+    <h2>Payment Options</h2>
+    <div class="payment-types">
+        <div class="payment-type">
+            <input type="radio" id="card-payment" name="payment-type" value="card">
+            <label for="card-payment">Card Payment</label>
+        </div>
+        <div class="payment-type">
+            <input type="radio" id="eft-payment" name="payment-type" value="eft">
+            <label for="eft-payment">EFT Payment</label>
+        </div>
+    </div>
+    <div class="payment-form">
+        <div class="card-payment-form">
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-numberr" name="card-number">
+            <label for="card-expiry">Card Expiry:</label>
+            <input type="text" id="card-expiry" name="card-expiry">
+            <label for="card-cvv">Card CVV:</label>
+            <input type="text" id="card-cvv" name="card-cvv">
+        </div>
+        <div class="eft-payment-form">
+            <label for="eft-account-number">Account Number:</label>
+            <input type="text" id="eft-account-number" name="eft-account-number">
+            <label for="eft-branch-code">Branch Code:</label>
+            <input type="text" id="eft-branch-code" name="eft-branch-code">
+        </div>
+    </div>
+    <div class="pay-button">
+        <button class="jj" onclick="hkl()">PayNow</button>
+        @*@Html.ActionLink("Pay", "ConfirmAllOrder", "Product", null, new { @class = "btn btn-success col-4" })*@
+
+    </div>
+</div>
+    
+<script>
+    //$(document).ready(function () {
+    //    $('input[name="payment-type"]').on('change', function () {
+    //        var paymentType = $(this).val();
+    //        if (paymentType === 'card') {
+    //            $('.card-payment-form').show();
+    //            $('.eft-payment-form').hide();
+    //        } else if (paymentType === 'eft') {
+    //            $('.card-payment-form').hide();
+    //            $('.eft-payment-form').show();
+    //        }
+    //        else {
+    //            $('.card-payment-form').show();
+
+    //        }
+    //    });
+
+    //    $('.pay-button').on('click', function (e) {
+    //        e.preventDefault();
+    //        var paymentType = $('input[name="payment-type"]:checked').val();
+    //        var paymentDetails = {};
+    //        if (paymentType === 'card') {
+    //            paymentDetails.cardNumber = $('#card-number').val();
+    //            paymentDetails.cardExpiry = $('#card-expiry').val();
+    //            paymentDetails.cardCvv = $('#card-cvv').val();
+    //        } else if (paymentType === 'eft') {
+    //            paymentDetails.accountNumber = $('#eft-account-number').val();
+    //            paymentDetails.branchCode = $('#eft-branch-code').val();
+    //        }
+    //        // Validate payment details
+    //        if (paymentType === 'card') {
+    //            if (!paymentDetails.cardNumber || !paymentDetails.cardExpiry || !paymentDetails.cardCvv) {
+    //                alert('Please enter all card details');
+    //                return;
+    //            }
+    //        } else if (paymentType === 'eft') {
+    //            if (!paymentDetails.accountNumber || !paymentDetails.branchCode) {
+    //                alert('Please enter all EFT details');
+    //                return;
+    //            }
+    //        }
+
+
+
+    function hkl() {
+        const caedn = document.getElementById('card-numberr').value.trim();
+        const date = document.getElementById('card-expiry').value.trim();
+        const CardCVV = document.getElementById('card-cvv').value.trim();
+        const AccountNumber = document.getElementById('eft-account-number').value.trim();
+        const BranchCode = document.getElementById('eft-branch-code').value.trim();
+
+        @*if (caedn === '' || date === '' || CardCVV === '' || AccountNumber === '' || BranchCode==='') {
+            alert('Please fill in all fields');
+            window.location.href = '@Url.Action("Create", "Pay")';
+            return false;
+        }
+
+      else {
+            alert("Good");
+            window.location.href = '@Url.Action("ConfirmAllOrder", "Product")';
+            return true;
+        }
+        //else {
+        //    alert("Bad");
+        //}
+
+       return true;*@
+        if (!caedn || caedn.length !== 16 || isNaN(caedn)) {
+                alert("Please enter a valid 16-digit Card Number.");
+                return false;
+            }
+        if (!AccountNumber || AccountNumber.length !== 10 || isNaN(AccountNumber)) {
+                alert("Please enter a valid 10-digit account number.");
+                return false;
+            }
+        if (!CardCVV || CardCVV.length !== 3 || isNaN(CardCVV)) {
+                alert("Please enter a valid 3-digit VCC.");
+                return false;
+            }
+        if (!date || date.length !== 4 || isNaN(date)) {
+                alert("Please enter a valid 4-digit date input.");
+                return false;
+            }
+        if (!BranchCode || BranchCode.length !== 6 || isNaN(BranchCode)) {
+                alert("Please enter a valid 6-digit branch code.");
+                return false;
+        }
+
+        // All validations passed, redirect to the ActionLink
+            alert("Payment Successful")
+            window.location.href = '@Url.Action("ConfirmAllOrder", "Product")';
+            return false; // Prevent form submission
+
+    }
+
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

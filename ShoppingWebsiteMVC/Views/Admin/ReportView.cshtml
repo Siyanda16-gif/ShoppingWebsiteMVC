@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ShoppingWebsiteMVC.Models.Order>
+
+@{
+    ViewBag.Title = "ReportView";
+    ViewBag.seven = "active";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<h3>Reports </h3>
+<hr />
+<div class="table-responsive">
+    <table class="table table-striped table-primary">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Transactions.TId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users.Firstname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NoofProduct)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Products.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Transactions.TId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Users.Firstname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoofProduct)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TDate)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

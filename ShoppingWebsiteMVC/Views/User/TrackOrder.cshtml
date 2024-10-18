@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+<%@ Page Language="C#" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Order Tracking</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var orderStatus = "Waiting";
+            var daysElapsed = 0;
+
+            // Update order status every 4 days
+            setInterval(updateOrderStatus, 4 * 24 * 60 * 60 * 1000); // 4 days in milliseconds
+
+            function updateOrderStatus() {
+                daysElapsed += 4;
+                switch (orderStatus) {
+                    case "Waiting":
+                        orderStatus = "Preparing Order";
+                        break;
+                    case "Preparing Order":
+                        orderStatus = "Transporting";
+                        break;
+                    case "Transporting":
+                        orderStatus = "On the Way";
+                        break;
+                    case "On the Way":
+                        orderStatus = "Ready";
+                        break;
+                    case "Ready":
+                        orderStatus = "Waiting";
+                        break;
+                }
+                $("#orderStatus").text(orderStatus);
+            }
+
+            // Initial update
+            updateOrderStatus();
+        });
+    </script>
+</head>
+<body>
+    <h1>Order Tracking</h1>
+    <p id="orderStatus">Waiting</p>
+</body>
+</html>

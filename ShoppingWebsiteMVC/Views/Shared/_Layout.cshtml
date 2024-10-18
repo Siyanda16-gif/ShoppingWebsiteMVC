@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Shopping Bag</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <style>
+        body {
+            background-image: url(../images/background.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed; /* Keep background fixed */
+            font-family: Arial, sans-serif;
+            transition: background 0.5s ease-in-out;
+        }
+
+        button:focus {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        .navbar {
+            background-color: rgba(0, 123, 255, 0.9);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+            transition: color 0.3s ease;
+        }
+
+            .navbar-brand:hover, .nav-link:hover {
+                color: #ffcc00 !important;
+            }
+
+        .logo {
+            width: 400px;
+            margin: 30px auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+            .logo:hover {
+                transform: scale(1.05);
+            }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .container:hover {
+                box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+            }
+
+        .foot {
+            color: white;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(50, 168, 133)">
+                <div class="navbar-brand">
+                    <span><i class="fa fa-shopping-cart"></i></span>
+                    NGD Solutions
+                </div>
+                <ul class="nav navbar-nav col-md-6">
+                    <li class="nav-item col-12">
+                        <form method="get" action="/Product/Search">
+                            @*<div class="input-group shadow">
+                                    @Html.TextBox("ProductName", null, new { @class = "form-control ", @placeholder = "Search for Products, brands and more" })
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-light btn-sm"><i class="fa fa-search text-primary"></i></button>
+                                    </div>
+                                </div>*@
+                        </form>
+                    </li>
+                </ul>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item @ViewBag.home"><a href="/" class="nav-link">Home <i class="fa fa-home"></i></a></li>
+                        <li class="nav-item @ViewBag.order"><a href="/User/Myorders" class="nav-link">My Orders <i class="fa fa-shopping-bag"></i></a></li>
+                        <li class="nav-item @ViewBag.cart"><a href="/User/Cart" class="nav-link">My Cart <i class="fa fa-shopping-cart"></i></a></li>
+                        @if (Session["UserId"] != null)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Hi @Session["Username"] <i class="fa fa-user"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -30px;">
+                                    <a class="dropdown-item" href="/@Session["Role"]/Settings">Settings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/User/Logout">Logout <i class="fa fa-sign-out"></i></a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a href="/User/Index" class="nav-link">Login <i class="fa fa-sign-in"></i></a></li>
+                        }
+                    </ul>
+                </div>
+            </nav>
+            <img src="../images/actualp.jpg" class="logo" />
+            <div class="container">
+                @RenderBody()
+                <hr class="foot" />
+                <footer class="text-center mb-0">
+                    <p class="foot">&copy; @DateTime.Now.Year - NGD Solutions</p>
+
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/0725428266" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+
+                    <div class="contact-info">
+                        <p>Phone: <a href="tel:0725428266">0725428266</a></p>
+                        <p>Email: <a href="mailto:VCC.GG@gmail.com">VCC.GG@GMAIL.COM</a></p>
+                        <p>Location: Durban, 82 Diakonia Avenue</p>
+                    </div>
+                </footer>
+
+                <style>
+                    .social-icons {
+                        margin: 10px 0;
+                    }
+
+                        .social-icons a {
+                            margin: 0 10px;
+                            color: #333; /* Change this to your desired icon color */
+                            text-decoration: none;
+                        }
+
+                        .social-icons i {
+                            font-size: 20px; /* Adjust size as needed */
+                        }
+
+                    .contact-info p {
+                        margin: 5px 0;
+                    }
+                </style>
+
+                <!-- Include Font Awesome in your layout file or directly in this page -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
+</body>
+</html>

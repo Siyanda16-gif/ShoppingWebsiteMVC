@@ -1,0 +1,131 @@
+﻿@model IEnumerable<ShoppingWebsiteMVC.Models.Cart>
+
+@{
+    ViewBag.Title = "View Cart";
+    ViewBag.cart = "active";
+    double totprice = 0;
+    int quantity = 0;
+}
+
+<style>
+    body {
+        background-color: #f9f9f9; /* Light background for contrast */
+        font-family: Arial, sans-serif;
+    }
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .product-image {
+        height: 100px;
+        object-fit: cover;
+    }
+    .product-link {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .product-link:hover {
+        color: #0056b3;
+    }
+    .custom-details {
+        background-color: #e9ecef;
+        border-radius: 5px;
+        padding: 15px;
+        margin-top: 20px;
+    }
+    .total-price {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #dc3545; /* Bootstrap danger color */
+    }
+    .empty-cart {
+        text-align: center;
+        padding: 20px;
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header" style="background-color: rgb(50, 168, 133)">
+                    <h4>My Cart</h4>
+                </div>
+                <div class="card-body">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="row align-items-center my-3">
+                                <div class="col-md-3 text-center">
+                                    @{ var img = item.ProductId + ".jpg"; }
+                                    <img src="~/Images/@img" class="product-image" />
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>
+                                        <a href="/Product/ProductView/@item.ProductId" class="product-link">
+                                            @Html.DisplayFor(modelItem => item.Products.ProductName)
+                                        </a>
+                                    </h5>
+                                    <p>Quantity: @Html.DisplayFor(modelItem => item.NoofProduct)</p>
+                                    <p class="text-muted">Seller: @Html.DisplayFor(modelItem => item.Products.Supplier.Name)</p>
+                                    <p class="total-price">R @Html.DisplayFor(modelItem => item.Amount)</p>
+                                    @{ totprice += item.Amount; quantity++; }
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    @Html.ActionLink("Place Order", "BuyNow", "Product", new { UserId = item.UserId, ProductId = item.ProductId }, new { @class = "btn btn-primary btn-sm m-1" })
+                                    @Html.ActionLink("Remove", "CartDelete", new { UserId = item.UserId, ProductId = item.ProductId }, new { @class = "btn btn-danger btn-sm" })
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                        <div class="text-right mb-3">
+                            @Html.ActionLink("Buy All", "BuyAll", "Product", null, new { @class = "btn btn-success" })
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-cart">
+                            <h5>Your cart <i class="fa fa-shopping-cart"></i> is empty.</h5>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="custom-details">
+        <h5>Customs</h5>
+        <p>Size: <span id="cartSize"></span></p>
+        <p>Badge Name: <span id="cartBadgeName"></span></p>
+        <p>Badge Location: <span id="cartBadgeLocation"></span></p>
+        <p>Cloth Color: <span id="cartClothColor"></span></p>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var orderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+            if (orderDetails) {
+                document.getElementById('cartSize').innerText = orderDetails.size || 'N/A';
+                document.getElementById('cartBadgeName').innerText = orderDetails.badgeName || 'N/A';
+                document.getElementById('cartBadgeLocation').innerText = orderDetails.badgeLocation || 'N/A';
+                document.getElementById('cartClothColor').innerText = orderDetails.clothColor || 'N/A';
+            }
+        }
+    </script>
+
+    <div class="text-center mt-4">
+        @Html.ActionLink("Buy More Products", "Index", "Product", null, new { @class = "btn btn-info" })
+    </div>
+</div>

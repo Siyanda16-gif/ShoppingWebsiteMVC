@@ -1,0 +1,57 @@
+﻿@model ShoppingWebsiteMVC.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.one = "active";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+<h3 class="alert-danger m-2 p-2">Are you sure you want to clear all stocks of this product ? </h3>
+<div class="card m-2 col-5">
+    <div class="card-body">
+
+        <dt class="card-header h4">
+            @Html.DisplayFor(model => model.ProductName)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrandName)
+        </dd>
+
+        Price: R @Html.DisplayFor(model => model.Price)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Units)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Units)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-danger">Clear Stock <i class="fa fa-remove"></i></button>
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+        </div>
+    }
+</div>

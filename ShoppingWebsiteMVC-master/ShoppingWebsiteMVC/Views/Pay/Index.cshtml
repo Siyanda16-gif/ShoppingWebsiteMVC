@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ShoppingWebsiteMVC.Models.Payments>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Espiry_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VCC)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Espiry_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VCC)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Card_Number }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Card_Number }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Card_Number })
+        </td>
+    </tr>
+}
+
+</table>

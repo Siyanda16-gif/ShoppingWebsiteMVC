@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ShoppingWebsiteMVC.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.home = "active";
+}
+<style>
+    .Schools {
+        align-items: end;
+        text-align-last: end;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border:double;
+        border-block:dashed;
+        border-color:red;
+        width:80px;
+        padding-right:50px;
+        background-color:red;
+        text-decoration-color:blue;
+        background:transparent;
+    }
+
+    .hrr {
+        background-color: rgb(43, 155, 207);
+        height: 1px;
+        width: 700px;
+    }
+    .Vcc {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: rgb(90, 156, 161);
+        margin-top:20px;
+        margin-bottom:20px;
+        text-align:center;
+        
+
+
+        
+    }
+        .Vcc:hover {
+            opacity: 1;
+            color: rgb(207, 120, 43);
+            transition-duration: 0.7s;
+            cursor: pointer;
+            font-size: 25px;
+        }
+    .please {
+        color: rgb(43, 207, 199);
+        margin-bottom: 20px;
+    }
+    
+</style>
+<hr class="hrr" />
+<h3 class="Vcc">
+   Welcome to VCC Branding clothings
+</h3>
+<h2 class="please">
+    Please select University 
+</h2>
+<div class="m-3" class="Schools">
+    @foreach (var item in Model)
+    {
+        @Html.ActionLink(item.Name, "Index", new { id = item.Name }, new { @class = "list-group-item list-group-item-action" })
+    }
+
+
+</div>
+<div >
+    @Html.ActionLink("All Products", "Index", new { id = "All" }, new { @class = "list-group-item list-group-item-action" })
+</div>
+

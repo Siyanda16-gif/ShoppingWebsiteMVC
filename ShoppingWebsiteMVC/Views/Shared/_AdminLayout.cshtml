@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Shopping Bag</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/navbar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+</head>
+<body>
+    <div class="wrapper">
+        @Html.Partial("_Sidebar")
+        <!-- Page Content  -->
+        <div id="content" class="active">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <button type="button" id="sidebarCollapse" class="btn btn-dark btn-sm mr-2">
+                    <i class="fa fa-align-left"></i>
+                </button>
+                <div class="navbar-brand">
+                    <span><i class="fa fa-shopping-cart"></i></span>
+                    ShoppingBag
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav ml-auto">
+                        @if (Session["UserId"] != null)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @Session["Username"] <i class="fa fa-user"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -76px;">
+                                    <a class="dropdown-item" href="/@Session["Role"]/Settings">Settings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/User/Logout">Logout <i class="fa fa-sign-out"></i></a>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </nav>
+            <div class="container body-content">
+                @RenderBody()
+            </div>
+        </div>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
+        <!-- jQuery Custom Scroller CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar, #content').toggleClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+            });
+        </script>
+</body>
+</html>

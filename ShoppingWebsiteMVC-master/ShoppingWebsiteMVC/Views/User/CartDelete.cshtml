@@ -1,0 +1,53 @@
+﻿@model ShoppingWebsiteMVC.Models.Cart
+
+@{
+    ViewBag.Title = "CartDelete";
+    ViewBag.cart= "active";
+
+}
+<style>
+    .gy{
+        color:white;
+    }
+</style>
+
+<h3 class="alert-danger p-3 m-2" class="gy">Are you sure you want to remove this from your cart?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="gy">
+            @Html.DisplayNameFor(model => model.Products.ProductName)
+        </dt>
+
+        <dd class="gy">
+            @Html.DisplayFor(model => model.Products.ProductName)
+        </dd>
+
+        <dt class="gy">
+            @Html.DisplayNameFor(model => model.NoofProduct)
+        </dt>
+
+        <dd class="gy">
+            @Html.DisplayFor(model => model.NoofProduct)
+        </dd>
+
+        <dt class="gy">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd class="gy">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+            @Html.ActionLink("Back to Cart", "Cart", null, new { @class = "btn btn-info btn-sm" })
+        </div>
+    }
+</div>

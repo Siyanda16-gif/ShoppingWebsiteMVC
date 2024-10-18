@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ShoppingWebsiteMVC.Models.Category>
+
+@{
+    ViewBag.Title = "Categories";
+    ViewBag.four = "active";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Categories</h3>
+
+<p>
+    @Html.ActionLink("Add New", "NewCategory",null,new { @class="btn btn-sm btn-success"})
+</p>
+<div class="table-responsive">
+    <table class="table table-striped table-primary table-sm w-50 m-1">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a href="/Admin/EditCategory/@item.CategoryId" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
